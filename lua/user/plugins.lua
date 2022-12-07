@@ -150,23 +150,33 @@ return packer.startup(function(use)
 			require("symbols-outline").setup()
 		end,
 	})
-  
-  --[[ Yaml Assistant ]]
-  use {
-    "someone-stole-my-name/yaml-companion.nvim",
-    requires = {
-      { "neovim/nvim-lspconfig" },
-      { "nvim-lua/plenary.nvim" },
-      { "nvim-telescope/telescope.nvim" },
-    },
-  }
+
+	--[[ Yaml Assistant ]]
+	use({
+		"someone-stole-my-name/yaml-companion.nvim",
+		requires = {
+			{ "neovim/nvim-lspconfig" },
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-telescope/telescope.nvim" },
+		},
+	})
+	use({ "jpalardy/vim-slime" })
 	-- Themer...
 	use({
 		"themercorp/themer.lua",
 	})
-  -- schemastore
-  use("b0o/schemastore.nvim")
-  -- Autofmrat on save
+	-- Snippit Engine
+	use({
+		"L3MON4D3/LuaSnip",
+		config = function()
+			require("user.luasnip")
+		end,
+	})
+	-- Premade Snippits
+	use("rafamadriz/friendly-snippets")
+	-- schemastore
+	use("b0o/schemastore.nvim")
+	-- Autofmrat on save
 	use("lukas-reineke/lsp-format.nvim")
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

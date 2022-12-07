@@ -1,5 +1,4 @@
 local fn = vim.fn
-
 -- Automatically install packer
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
@@ -85,7 +84,7 @@ return packer.startup(function(use)
 	use({ "RRethy/vim-illuminate", commit = "a2e8476af3f3e993bb0d6477438aad3096512e42" })
 
 	-- Telescope
-	use({ "nvim-telescope/telescope.nvim", commit = "76ea9a898d3307244dce3573392dcf2cc38f340f" })
+	-- use({ "nvim-telescope/telescope.nvim", commit = "76ea9a898d3307244dce3573392dcf2cc38f340f" })
 
 	-- Treesitter
 	use({
@@ -102,7 +101,73 @@ return packer.startup(function(use)
 	use({ "ravenxrz/DAPInstall.nvim", commit = "8798b4c36d33723e7bba6ed6e2c202f84bb300de" })
 
 	-- My custom plugins
-	use({ "folke/which-key.nvim", commit = "61553aeb3d5ca8c11eea8be6eadf478062982ac9"})
+	use({ "folke/which-key.nvim", commit = "61553aeb3d5ca8c11eea8be6eadf478062982ac9" })
+	use({ "mg979/vim-visual-multi", commit = "724bd53adfbaf32e129b001658b45d4c5c29ca1a" })
+
+	use({
+		"nvim-telescope/telescope-fzf-native.nvim",
+		run = "make",
+		requires = "nvim-telescope/telescope.nvim",
+		config = function()
+			require("telescope").load_extension("fzf")
+		end,
+	})
+	use({ "nvim-telescope/telescope-ui-select.nvim" })
+	use({
+		"someone-stole-my-name/yaml-companion.nvim",
+		requires = {
+			{ "neovim/nvim-lspconfig" },
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-telescope/telescope.nvim" },
+		},
+	})
+	-- LSP Information
+	use({
+		"ray-x/lsp_signature.nvim",
+		config = function()
+			require("user.lsp.signature")
+		end,
+	})
+	-- LSP Status indicator
+	use({
+		"j-hui/fidget.nvim",
+		config = function()
+			require("fidget").setup({})
+		end,
+	})
+	-- LSP lines instead of being hidden
+	use({
+		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+		config = function()
+			require("lsp_lines").setup()
+		end,
+	})
+
+	-- LSP Symbols
+	use({
+		"simrat39/symbols-outline.nvim",
+		config = function()
+			require("symbols-outline").setup()
+		end,
+	})
+  
+  --[[ Yaml Assistant ]]
+  use {
+    "someone-stole-my-name/yaml-companion.nvim",
+    requires = {
+      { "neovim/nvim-lspconfig" },
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-telescope/telescope.nvim" },
+    },
+  }
+	-- Themer...
+	use({
+		"themercorp/themer.lua",
+	})
+  -- schemastore
+  use("b0o/schemastore.nvim")
+  -- Autofmrat on save
+	use("lukas-reineke/lsp-format.nvim")
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if PACKER_BOOTSTRAP then

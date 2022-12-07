@@ -17,7 +17,6 @@ M.setup = function()
 		{ name = "DiagnosticSignHint", text = "" },
 		{ name = "DiagnosticSignInfo", text = "" },
 	}
-
 	for _, sign in ipairs(signs) do
 		vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
 	end
@@ -68,6 +67,19 @@ local function lsp_keymaps(bufnr)
 	keymap(bufnr, "n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
 	keymap(bufnr, "n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
 	keymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+  local status_ok, which_key = pcall(require, "which-key")
+  if status_ok then
+    which_key.register({
+      g = {
+        D = "LSP Declaration",
+        d = "LSP Definition",
+        i = "LSP Implementation",
+        r = "LSP Reference",
+        l = "LSP Diagnostics",
+      },
+      K = "LSP Hover",
+    })
+  end
 end
 
 M.on_attach = function(client, bufnr)

@@ -136,12 +136,12 @@ return packer.startup(function(use)
 		end,
 	})
 	-- LSP lines instead of being hidden
-	use({
-		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-		config = function()
-			require("lsp_lines").setup()
-		end,
-	})
+	-- use({
+	-- 	"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+	-- 	config = function()
+	-- 		require("lsp_lines").setup()
+	-- 	end,
+	-- })
 
 	-- LSP Symbols
 	use({

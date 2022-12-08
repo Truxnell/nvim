@@ -162,14 +162,16 @@ local mappings = {
 			"<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>",
 			"Prev Diagnostic",
 		},
-		l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
 		q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
 		r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
 		s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
+		c = { '<cmd>lua require("lua_lines").toggle<cr>', "Toggle virtual lines" },
 		S = {
 			"<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
 			"Workspace Symbols",
 		},
+		v = { "<cmd>lua vim.diagnostic.config({virtual_text=true})<cr>", "Enable virtual text" },
+		V = { "<cmd>lua vim.diagnostic.config({virtual_text=false})<cr>", "Disable virtual text" },
 	},
 	s = {
 		name = "sops",
@@ -179,15 +181,17 @@ local mappings = {
 	},
 	t = {
 		name = "ToggleTerm",
-    n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
-    u = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU" },
-    t = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
-    p = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "Python" },
+		n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
+		u = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU" },
+		t = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
+		p = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "Python" },
 		f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
 		h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
 		v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
 	},
 }
+
+vim.keymap.set("", "<Leader>lt", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })
 
 which_key.setup(setup)
 which_key.register(mappings, opts)

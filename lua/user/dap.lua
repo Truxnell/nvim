@@ -73,3 +73,9 @@ end
 dap.listeners.before.event_exited["dapui_config"] = function()
 	dapui.close()
 end
+
+--enable virtual text
+require("nvim-dap-virtual-text").setup()
+
+require("dap-python").setup("~/.virtualenvs/debugpy/bin/python")
+require("dap-python").test_runner = "pytest"

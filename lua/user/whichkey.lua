@@ -79,6 +79,14 @@ local opts = {
 }
 
 local mappings = {
+	["<F1>"] = { "<cmd>lua require('dap').step_over()<CR>", "Step over," },
+	["<F2>"] = { "<cmd>lua require('dap').step_into()<CR>", "Step Into" },
+	["<F3>"] = { "<cmd>lua require('dap').step_out()<CR>,", "Step Out" },
+
+	["<F5>"] = { "<cmd>lua require('dap').continue()<CR>", "Continue" },
+	["<F9>"] = { "<cmd>lua require('dap').toggle_breakpoint()<CR>", "Toggle Breakpoint" },
+	["<F8>"] = { "<cmd>lua require('dap').toggle<CR>", "Toggle" },
+
 	["A"] = { "<cmd>Alpha<cr>", "Alpha" },
 	["a"] = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
 	["b"] = { "<cmd>Telescope buffers<cr>", "Buffers" },
@@ -107,6 +115,16 @@ local mappings = {
 		C = { "<cmd>Telescope commands<cr>", "Commands" },
 		p = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
 		n = { "<cmd>Telescope notify<cr>", "Notification History" },
+		T = { "<cmd>Telescope treesitter<cr>", "Treesitter" },
+
+		d = {
+			name = "Debug",
+			c = { "<cmd>lua require 'telescope'.extensions.dap.commands{}<CR>", "DAP Commands" },
+			C = { "<cmd>lua require 'telescope'.extensions.dap.configurations{}<CR>", "DAP Configuration" },
+			b = { "<cmd>lua require 'telescope'.extensions.dap.breakpoints{}<CR>", "DAP Breakpoints" },
+			v = { "<cmd>lua require 'telescope'.extensions.dap.variables{}<CR>", "DAP Variables" },
+			f = { "<cmd>lua require 'telescope'.extensions.dap.frames{}<CR>", "DAP Frames" },
+		},
 	},
 
 	p = {
@@ -189,8 +207,46 @@ local mappings = {
 		h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
 		v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
 	},
+	d = {
+		name = "Debug",
+		s = {
+			name = "Step",
+			c = { "<cmd>lua require('dap').continue()<CR>", "Continue" },
+			v = { "<cmd>lua require('dap').step_over()<CR>", "Step Over" },
+			i = { "<cmd>lua require('dap').step_into()<CR>", "Step Into" },
+			o = { "<cmd>lua require('dap').step_out()<CR>", "Step Out" },
+		},
+		h = {
+			name = "Hover",
+			h = { "<cmd>lua require('dap.ui.variables').hover()<CR>", "Hover" },
+			v = { "<cmd>lua require('dap.ui.variables').visual_hover()<CR>", "Visual Hover" },
+		},
+		u = {
+			name = "UI",
+			h = { "<cmd>lua require('dap.ui.widgets').hover()<CR>", "Hover" },
+			f = { "local widgets=require('dap.ui.widgets');widgets.centered_float(widgets.scopes)<CR>", "Float" },
+		},
+		r = {
+			name = "Repl",
+			o = { "<cmd>lua require('dap').repl.open()<CR>", "Open" },
+			l = { "<cmd>lua require('dap').repl.run_last()<CR>", "Run Last" },
+		},
+		b = {
+			name = "Breakpoints",
+			c = {
+				"<cmd>lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
+				"Breakpoint Condition",
+			},
+			m = {
+				"<cmd>lua require('dap').set_breakpoint({ nil, nil, vim.fn.input('Log point message: ') })<CR>",
+				"Log Point Message",
+			},
+			t = { "<cmd>lua require('dap').toggle_breakpoint()<CR>", "Create" },
+		},
+		c = { "<cmd>lua require('dap').scopes()<CR>", "Scopes" },
+		i = { "<cmd>lua require('dap').toggle()<CR>", "Toggle" },
+	},
 }
-
 vim.keymap.set("", "<Leader>lt", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })
 
 which_key.setup(setup)

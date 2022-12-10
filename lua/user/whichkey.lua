@@ -97,6 +97,7 @@ local mappings = {
 	["v"] = { "<cmd>vsplit<CR>", "Vsplit" },
 	["h"] = { "<cmd>split<CR>", "Split" },
 	["/"] = { "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", "Comment Lines" },
+	["t"] = { "<cmd>:ToggleBool<CR>", "Toggle Boolean" },
 	f = {
 		name = "Find",
 		b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },

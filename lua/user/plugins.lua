@@ -178,7 +178,8 @@ return packer.startup(function(use)
 	use("b0o/schemastore.nvim")
 	-- Autofmrat on save
 	use("lukas-reineke/lsp-format.nvim")
-
+	--Toggle Booleans
+	--user("sagarrakshe/toggle-bool")
 	-- dap extension
 	use("mfussenegger/nvim-dap-python")
 	use("theHamsta/nvim-dap-virtual-text")

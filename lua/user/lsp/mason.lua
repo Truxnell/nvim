@@ -7,7 +7,7 @@ local servers = {
 	"bashls",
 	"jsonls",
 	"yamlls",
-  "pyright"
+	"mypy",
 }
 
 local settings = {

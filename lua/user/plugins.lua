@@ -113,14 +113,6 @@ return packer.startup(function(use)
 		end,
 	})
 	use({ "nvim-telescope/telescope-ui-select.nvim" })
-	use({
-		"someone-stole-my-name/yaml-companion.nvim",
-		requires = {
-			{ "neovim/nvim-lspconfig" },
-			{ "nvim-lua/plenary.nvim" },
-			{ "nvim-telescope/telescope.nvim" },
-		},
-	})
 	-- LSP Information
 	use({
 		"ray-x/lsp_signature.nvim",
@@ -179,7 +171,7 @@ return packer.startup(function(use)
 	-- Autofmrat on save
 	use("lukas-reineke/lsp-format.nvim")
 	--Toggle Booleans
-	--user("sagarrakshe/toggle-bool")
+	use("sagarrakshe/toggle-bool")
 	-- dap extension
 	use("mfussenegger/nvim-dap-python")
 	use("theHamsta/nvim-dap-virtual-text")
@@ -187,10 +179,47 @@ return packer.startup(function(use)
 		"nvim-neotest/neotest",
 		requires = {
 			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
+			"nvidiaglinesm-treesitter/nvim-treesitter",
 		},
 	})
+	use({
+		"danymat/neogen",
+		config = function()
+			require("neogen").setup({})
+		end,
+		requires = "nvim-treesitter/nvim-treesitter",
+		-- Uncomment next line if you want to follow only stable versions
+		-- tag = "*"
+	})
+	use("nvim-neotest/neotest-python")
 	use("nvim-telescope/telescope-dap.nvim")
+	use("nvim-neotest/neotest-vim-test")
+	use({
+		"nvim-neotest/neotest",
+		opt = true,
+		wants = {
+			"plenary.nvim",
+			"nvim-treesitter",
+			"FixCursorHold.nvim",
+			"neotest-python",
+			"neotest-vim-test",
+		},
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			"antoinemadec/FixCursorHold.nvim",
+			"nvim-neotest/neotest-python",
+			"nvim-neotest/neotest-plenary",
+			"nvim-neotest/neotest-go",
+			"haydenmeade/neotest-jest",
+			"nvim-neotest/neotest-vim-test",
+		},
+		module = { "neotest" },
+		config = function()
+			require("config.neotest").setup()
+		end,
+	})
+
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if PACKER_BOOTSTRAP then

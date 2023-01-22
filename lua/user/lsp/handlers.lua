@@ -48,6 +48,10 @@ M.setup = function()
 	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
 		border = "rounded",
 	})
+	vim.cmd(
+		[[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor", border="single"})]]
+	)
+	vim.cmd("autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()")
 end
 
 local function lsp_keymaps(bufnr)
@@ -67,19 +71,19 @@ local function lsp_keymaps(bufnr)
 	keymap(bufnr, "n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
 	keymap(bufnr, "n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
 	keymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-  local status_ok, which_key = pcall(require, "which-key")
-  if status_ok then
-    which_key.register({
-      g = {
-        D = "LSP Declaration",
-        d = "LSP Definition",
-        i = "LSP Implementation",
-        r = "LSP Reference",
-        l = "LSP Diagnostics",
-      },
-      K = "LSP Hover",
-    })
-  end
+	local status_ok, which_key = pcall(require, "which-key")
+	if status_ok then
+		which_key.register({
+			g = {
+				D = "LSP Declaration",
+				d = "LSP Definition",
+				i = "LSP Implementation",
+				r = "LSP Reference",
+				l = "LSP Diagnostics",
+			},
+			K = "LSP Hover",
+		})
+	end
 end
 
 M.on_attach = function(client, bufnr)
